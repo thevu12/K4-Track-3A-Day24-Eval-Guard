@@ -10,3 +10,7 @@ nemoguardrails==0.10.0
 openai==1.109.1
 annoy==1.17.3
 numpy==1.26.4
+# datasets 2.x/RAGAS 0.1 use the NumPy 1.x runtime above. New Arrow wheels
+# require NumPy 2 at import time even when dependency resolution succeeds.
+pyarrow==17.0.0
+pandas==2.2.3

@@ -1,6 +1,6 @@
 """Optional integration batch: paid/network calls only with --run-live."""
 import pytest
-from config import (OPENAI_API_KEY,ADVERSARIAL_SET_PATH,CLEAN_SET_PATH,OUTPUT_SET_PATH,
+from config import (LLM_API_KEY,ADVERSARIAL_SET_PATH,CLEAN_SET_PATH,OUTPUT_SET_PATH,
                     ANSWERS_PATH,TEST_SET_PATH,HUMAN_LABELS_PATH)
 from src.experiment_support import read_json,require_completed
 from src.experiment_runners import run_phase_b,run_phase_c
@@ -11,8 +11,8 @@ pytestmark=pytest.mark.integration
 
 @pytest.fixture(scope="module")
 def live_batch(request):
-    if not request.config.getoption("--run-live") or not OPENAI_API_KEY:
-        pytest.skip("Requires --run-live and OPENAI_API_KEY; may incur API costs.")
+    if not request.config.getoption("--run-live") or not LLM_API_KEY:
+        pytest.skip("Requires --run-live and a provider key; may incur API costs.")
     from src import phase_b_judge,phase_c_guard
     require_completed(phase_b_judge)
     require_completed(phase_c_guard)

@@ -1,5 +1,33 @@
 # K4 Track 3A — Production Eval + Guardrail Stack
 
+## Bản triển khai của nhóm Vũ – Nguyên
+
+Thành viên: **Giang Thế Vũ — 02478** và **Nguyễn Hoàng Lê Nguyên — 02472**.
+Xem [TEAM](doc/TEAM.md) để phân biệt thông tin thành viên, phần AI hỗ trợ và
+phần đóng góp cá nhân cần xác nhận; không tạo commit thay danh tính thành viên.
+
+Mã đã có BM25 + BGE-M3/Qdrant, multilingual cross-encoder reranking,
+enrichment metadata có nguồn, RAGAS adapter và các hàm Phase A/B/C.
+Hai PDF scan có sidecar OCR thật kèm SHA-256; PDF gốc và fixtures được giữ nguyên.
+Unit tests dùng mocks; chỉ artifacts từ runner thật mới là bằng chứng thực nghiệm.
+**Chưa có API key thì chưa thể xác nhận hoàn thành bài nộp.**
+
+Hướng dẫn chạy bản này: [RUNBOOK.md](doc/RUNBOOK.md). Sau khi cấu hình `.env`:
+
+```bash
+.venv/bin/python scripts/preflight.py --live
+.venv/bin/python scripts/complete_lab.py --live --regenerate
+```
+
+Lệnh hoàn thiện dùng lại artifacts còn hợp lệ để tránh gọi API trùng; có thể
+chọn `--regenerate` để sinh lại answers, `--rerun` để chạy lại các phase.
+Repo hiện có 50 answers extractive từ retrieval thật; bỏ `--regenerate`
+nếu chủ ý đánh giá bộ fallback đã lưu thay vì sinh câu trả lời bằng LLM.
+Lượt chạy live có chi phí API. `render_reports.py` chỉ đọc kết quả đã validate,
+không tạo điểm hay nhãn giả; thiếu bằng chứng thì dừng và giữ báo cáo hiện có.
+
+Phần phía dưới giữ hướng dẫn/tiêu chí gốc của starter.
+
 **Bài nhóm: mỗi nhóm dùng và nộp một repo chung của trưởng nhóm.**
 
 **Thời lượng trên lớp:** 15 phút kiểm tra sẵn sàng + 90 phút thực hành
